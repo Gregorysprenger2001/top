@@ -209,7 +209,7 @@ let map = L.map('map').setView([stop.lat, stop.lng], stop.zoom);
 
 //Overlays definieren
 let overlays = {
-    STOPS: L.featureGroup().addTo(map),
+    marker: L.featureGroup().addTo(map),
 }
 
 
@@ -219,7 +219,7 @@ L.control.layers({
     "OpenTopoMap": L.tileLayer.provider('OpenTopoMap'),
     "Esri WorldImagery": L.tileLayer.provider('Esri.WorldImagery'),
 }, {
-    "Etappen": overlays.STOPS
+    "Etappen": overlays.marker
 }).addTo(map);
 
 //Maßstab
@@ -239,7 +239,7 @@ for (let i = 0; i < STOPS.length; i++) {
   
 
     //Marker zeichnen
-    let marker = L.marker([STOPS[i].lat, STOPS[i].lng]).addTo(map);
+    let marker = L.marker([STOPS[i].lat, STOPS[i].lng]).addTo(overlays.marker);
     //Popup definieren
 
     marker.bindPopup(`
